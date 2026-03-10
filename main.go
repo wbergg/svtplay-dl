@@ -79,7 +79,7 @@ func main() {
 	success := 0
 	var failures []failure
 	for _, ep := range episodes {
-		fmt.Printf("Downloading S%02dE%02d: %s\n", ep.SeasonNumber, ep.EpisodeNumber, ep.Title)
+		fmt.Printf("Downloading [%s] %d - %s\n", ep.SeasonDir, ep.EpisodeNumber, ep.Title)
 		if err := DownloadEpisode(ep, showSlug); err != nil {
 			log.Printf("  Failed: %v", err)
 			failures = append(failures, failure{Episode: ep, Err: err})
@@ -93,7 +93,7 @@ func main() {
 	if len(failures) > 0 {
 		fmt.Printf("\nFailed episodes:\n")
 		for _, f := range failures {
-			fmt.Printf("  S%02dE%02d %s: %v\n", f.Episode.SeasonNumber, f.Episode.EpisodeNumber, f.Episode.Title, f.Err)
+			fmt.Printf("  [%s] %d - %s: %v\n", f.Episode.SeasonDir, f.Episode.EpisodeNumber, f.Episode.Title, f.Err)
 		}
 	}
 }
